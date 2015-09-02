@@ -34,4 +34,18 @@ fu! CocosComplete(findstart, base)
 	endif
 endfunction
 
+fu! s:TabCompleteWay()
+	" Check if the char before the cursor is an 
+	" underscore, letter, number, dot or opening parentheses.
+	" If it is, popup autocomplete menu
+	if searchpos('[_a-zA-Z0-9.(]\%#', 'nb') != [0, 0] 
+		return "\<C-X>\<C-O>"
+	else
+		return "\<Tab>"
+	endif
+endfunction
+
+" Omni autocomplete
 setlocal omnifunc=CocosComplete
+" map <Tab> to <C-x><C-o>, depend on the char defore the cursor
+inoremap <silent> <buffer> <Tab> <C-r>=<SID>TabCompleteWay()<CR>

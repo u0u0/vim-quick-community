@@ -1,6 +1,8 @@
 # vim-quick-cocos2d-x (Cocos2d-Lua)
 
-quick-cocos2d-x(Cocos2d-Lua) code autocomplete plugin for Vim
+quick-cocos2d-x ([Cocos2d-Lua](http://www.cocos.com/download/cocos2d-lua/)) code autocomplete plugin for Vim.
+
+Support Cocos2d-Lua v3.3
 
 ## Installation
 
@@ -21,4 +23,7 @@ let g:cocos2dx_diction_location = '~/.vim/bundle/vim-quick-cocos2d-x/key-dict'
 
 ## Optional
 
-Autocompletion is enabled by default via `<C-x><C-o>`
+Omni autocompletion is enabled by default via `<C-x><C-o>`
+`<Tab>` has been mapped to do omni autocompletion.
+
+Enjoy it!
