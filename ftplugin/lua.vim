@@ -73,6 +73,7 @@ import codecs
 import re
 import subprocess
 import platform
+import time
 
 def pyrun():
 	# get project "src" dir
@@ -149,12 +150,21 @@ def pyrun():
 		args.append("-size")
 		args.append(width + "x" + height)
 	
-	# kill pre Player
+	# kill previous Player
 	global playerProcess
 	if playerProcess:
-		# FIXME: ternimate on Mac os x will crush player
 		playerProcess.terminate()
-	# run player
+		# waiting for end
+		while True:
+			ret = subprocess.Popen.poll(playerProcess)
+			if ret == 0:
+				break # end
+			elif ret == None:
+				time.sleep(0.5) # Process is Runing
+			else:
+				break # term
+		playerProcess = None # clear global var
+	# run a new player
 	playerProcess = subprocess.Popen(args)
 
 pyrun()
