@@ -104,8 +104,7 @@ def pyrun():
 		fp = codecs.open(rootFilePath,"r","utf-8")
 		quickRoot = fp.readline().strip('\n')
 		fp.close()
-		# XXX:player dir will change
-		playerPath = os.path.join(quickRoot, "player3.app/Contents/MacOS/player3")
+		playerPath = os.path.join(quickRoot, "quick/player/player3.app/Contents/MacOS/player3")
 	else:
 		print("Error:Wrong host system!")
 		return
