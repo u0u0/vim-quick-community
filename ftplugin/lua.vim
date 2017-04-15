@@ -1,8 +1,3 @@
-if exists('g:loaded_cocos2dxLua')
-	finish
-endif
-let g:loaded_cocos2dxLua = 1
-
 " ========== code autocomplete =============
 let s:myfile = readfile(fnamemodify(g:cocos2dx_diction_location, ":p"))
 let s:filelen = len(s:myfile)
