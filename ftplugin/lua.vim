@@ -69,6 +69,7 @@ import re
 import subprocess
 import platform
 import time
+import psutil
 
 def pyrun():
 	# get project "src" dir
@@ -144,22 +145,15 @@ def pyrun():
 		args.append("-size")
 		args.append(width + "x" + height)
 	
-	# kill previous Player
-	global playerProcess
-	if playerProcess:
-		playerProcess.terminate()
-		# waiting for end
-		while True:
-			ret = subprocess.Popen.poll(playerProcess)
-			if ret == 0:
-				break # end
-			elif ret == None:
-				time.sleep(0.5) # Process is Runing
-			else:
-				break # term
-		playerProcess = None # clear global var
+	# kill running Player3
+	procs = psutil.Process().children()
+	for p in procs:
+		if p.name() == "player3":
+			p.terminate()
+			p.wait()
+
 	# run a new player
-	playerProcess = subprocess.Popen(args)
+	subprocess.Popen(args)
 
 pyrun()
 EOF
