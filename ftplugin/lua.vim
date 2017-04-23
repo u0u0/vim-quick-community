@@ -114,8 +114,8 @@ def pyrun():
 	# parse config.lua & add to args
 	if os.path.exists(configPath):
 		f = codecs.open(configPath,"r","utf-8")
-		width = 640
-		height = 960
+		width = "640"
+		height = "960"
 		while True:
 			line = f.readline()
 			if line:
