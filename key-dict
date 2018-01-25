@@ -140,6 +140,8 @@ cc.KEYPAD_EVENT
 cc.LabelAtlas:_create(
 cc.LayerColor:create(
 cc.MENU_ITEM_CLICKED_EVENT
+cc.MoveBy:create(
+cc.MoveTo:create(
 cc.NODE_ENTER_FRAME_EVENT
 cc.NODE_EVENT
 cc.NODE_TOUCH_CAPTURE_EVENT
