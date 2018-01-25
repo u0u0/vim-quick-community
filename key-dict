@@ -323,7 +323,7 @@ cca.targeted(
 cca.tintBy(
 cca.tintTo(
 cca.toggle()
-center(
+center()
 checkbool(
 checkint(
 checknumber(
@@ -794,6 +794,7 @@ setTouchCaptureEnabled(
 setTouchEnabled(
 setTouchMode(
 setTouchSwallowEnabled(
+setVisible(
 setmetatable(
 setupState(
 show(
