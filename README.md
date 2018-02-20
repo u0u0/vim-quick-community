@@ -17,7 +17,7 @@ If you use [Pathogen](https://github.com/tpope/vim-pathogen), do this:
 
 ```sh
 cd ~/.vim/bundle
-git clone https://github.com/u0u0/vim-quick-cocos2d-x
+git clone https://github.com/u0u0/vim-quick-community.git
 ```
 
 > Note: plugin require Vim build with python support.
@@ -28,5 +28,5 @@ git clone https://github.com/u0u0/vim-quick-cocos2d-x
 Add this to your vimrc:
 
 ```
-let g:cocos2dx_diction_location = '~/.vim/bundle/vim-quick-cocos2d-x/key-dict'
+let g:cocos2dx_diction_location = '~/.vim/bundle/vim-quick-community/key-dict'
 ```
