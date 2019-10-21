@@ -622,6 +622,7 @@ setItemSize(
 setKeypadEnabled(
 setLocalZOrder(
 setName(
+setOpacity(
 setPOSTData(
 setPercent(
 setPhysicsBody(
