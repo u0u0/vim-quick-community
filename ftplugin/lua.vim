@@ -159,4 +159,90 @@ pyrun()
 EOF
 endfunction
 
+fu! LuaGameRunner()
+" start python code
+python << EOF
+import vim
+import os
+import codecs
+import re
+import subprocess
+import platform
+import time
+import psutil
+
+def pyrun():
+	# get project "src" dir
+	curLuaFilePath = vim.current.buffer.name
+	index = curLuaFilePath.rfind("src" + os.sep)
+	if index == -1:
+		print("Worning:Can't find project dir")
+		return
+	gameDir = curLuaFilePath[0:index]
+	srcDir = os.path.join(gameDir, "src")
+
+	# .vimrc `let g:cocos2d_lua_community_root = '/Users/u0u0/Cocos2d-Lua-Community'`
+	enginePath = vim.eval("g:cocos2d_lua_community_root")
+	# get run args from config.lua
+	configPath = os.path.join(srcDir, "config.lua")
+
+	# player path for platform
+	runnerPath = None
+	sysstr = platform.system()
+	if(sysstr == "Windows"):
+		runnerPath = os.path.join(enginePath, "tools/runner/bin/win32/LuaGameRunner.exe")
+	elif(sysstr == "Darwin"):
+		runnerPath = os.path.join(enginePath, "tools/runner/bin/LuaGameRunner.app/Contents/MacOS/LuaGameRunner")
+	else:
+		print("Error:Wrong host system!")
+		return
+
+	# param
+	args = [runnerPath]
+	args.append("--gamedir")
+	args.append(gameDir)
+	# parse config.lua & add to args
+	if os.path.exists(configPath):
+		f = codecs.open(configPath,"r","utf-8")
+		width = "640"
+		height = "960"
+		while True:
+			line = f.readline()
+			if line:
+				# debug
+				m = re.match("^DEBUG\s*=\s*(\d+)",line)
+				if m:
+					debug = m.group(1)
+					if debug == "2":
+						args.append("--log")
+				# resolution
+				m = re.match("^CONFIG_SCREEN_WIDTH\s*=\s*(\d+)",line)
+				if m:
+					width = m.group(1)
+					args.append("--width")
+					args.append(width)
+				m = re.match("^CONFIG_SCREEN_HEIGHT\s*=\s*(\d+)",line)
+				if m:
+					height = m.group(1)
+					args.append("--height")
+					args.append(height)
+			else:
+				break
+		f.close()
+	
+	# kill running Player3
+	procs = psutil.Process().children()
+	for p in procs:
+		if p.name() == "LuaGameRunner":
+			p.terminate()
+			p.wait()
+
+	# run a new player
+	subprocess.Popen(args)
+
+pyrun()
+EOF
+endfunction
+
 map <F5> :call RunPlayer()<CR>
+map <F6> :call LuaGameRunner()<CR>
