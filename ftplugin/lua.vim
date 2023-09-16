@@ -49,19 +49,19 @@ inoremap <silent> <buffer> <Tab> <C-r>=<SID>TabCompleteWay()<CR>
 
 " ======== binding key to run Quick Player for the project of this Lua file.====
 " Check if Vim support Python
-if !has('python')
-    echo "Error: Run Player Required vim compiled with +python"
+if !has('python3')
+    echo "Error: Run Player Required vim compiled with +python3"
    	echo "Vim for Windows,please check Python & Vim both are 32bit version!"
     finish
 endif
 
-python << EOF
+py3 << EOF
 playerProcess = None
 EOF
 
 fu! RunPlayer()
-" start python code
-python << EOF
+" start py3 code
+py3 << EOF
 import vim
 import os
 import codecs
@@ -160,8 +160,8 @@ EOF
 endfunction
 
 fu! LuaGameRunner()
-" start python code
-python << EOF
+" start py3 code
+py3 << EOF
 import vim
 import os
 import codecs
